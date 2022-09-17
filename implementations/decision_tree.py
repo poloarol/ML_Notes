@@ -1,6 +1,5 @@
 ### decision_tree.py
 
-from turtle import right
 import numpy as np
 from scipy.stats import mode
 
@@ -10,7 +9,7 @@ class Node(object):
         self.threshold = threshold
         self.left = left
         self.right = right
-        self.value = None
+        self.value = value
     
     
     def is_leaf_node(self):
@@ -104,5 +103,13 @@ class DecisionTree(object):
         
         return -np.sum([p * np.log(p) for p in ps if p > 0])
             
-    def predict(self, X: np.ndarray, y: np.ndarray):
-        pass
+    def predict(self, X: np.ndarray):
+        return [self._traverse_tree(x) for x in X]
+    
+    def _traverse_tree(self, x: np.ndarray, node: Node):
+        if node.is_leaf_node():
+            return node.value
+        
+        if x[node.feature] <= node.threshold:
+            return self._traverse_tree(x, node.left)
+        return self._traverse_tree(x, node.right)
