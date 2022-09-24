@@ -1,8 +1,8 @@
 ### random_forest.py
 
-from dataclasses import replace
 import numpy as np
 from scipy.stats import mode
+from collections import Counter
 
 from typing import List
 from decision_tree import DecisionTree
@@ -39,10 +39,16 @@ class RandomForest(object):
         n_samples = X.shape[0]
         idxs = np.random.choice(n_samples, n_samples, replace=True) 
         return X[idxs], y[idxs]
+    
+    def _most_common_label(self, y):
+        counter = Counter(y)
+        most_common = counter.most_common(1)[0][0]
+        return most_common
         
     
     def predict(self, X: np.ndarray) -> np.ndarray:
-       predictions = np.ndarray([tree.predict(X) for tree in self.trees])
-       tree_predictions = np.swapaxes(predictions, 0, 1)
-       
-       return mode(tree_predictions, axis=1)
+        predictions = np.array([tree.predict(X) for tree in self.trees])
+        tree_preds = np.swapaxes(predictions, 0, 1)
+        predictions = np.array([self._most_common_label(pred) for pred in tree_preds])
+        
+        return predictions

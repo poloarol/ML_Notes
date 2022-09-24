@@ -13,7 +13,7 @@ class SVM(object):
         self.lamda_param: float = lamda_param
         self.n_iters: int = n_iters
         self.weights: np.ndarray = None
-        self.bias: int = 0
+        self.bias: int = None
     
     
     def fit(self, X: np.ndarray, y: np.ndarray) -> np.ndarray:
@@ -23,6 +23,7 @@ class SVM(object):
         y_ = np.where(y <= 0, -1, 1)
         
         self.weights = np.zeros(n_features)
+        self.bias = 0
         
         # Gradient descent: Minimize J
         # J = (1/n * sum(max(0, 1-y(wx+b)))) + lambda||w||^2
@@ -31,7 +32,7 @@ class SVM(object):
         
         for _ in range(self.n_iters):
             for idx, x_i in enumerate(X):
-                condition = y_[idx] * (np.dot(x_i, self.weights) - self.b)
+                condition = y_[idx] * (np.dot(x_i, self.weights) - self.bias) >= 1
                 
                 # dJ/dw and dJ/db leads to the following update formula
                 if condition:
@@ -40,7 +41,7 @@ class SVM(object):
                     self.weights = self.learning_rate * (
                         2 * self.lamda_param * self.weights - np.dot(x_i, y_[idx])
                     )
-                    self.b = self.b - self.learning_rate * y_[idx]
+                    self.bias = self.bias - self.learning_rate * y_[idx]
         
     def predict(self, X) -> np.ndarray:
         # apply linear model

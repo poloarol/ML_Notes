@@ -3,6 +3,7 @@
 from typing import List
 
 import numpy as np
+from collections import Counter
 
 
 def sigmoid(x) -> np.ndarray:
@@ -21,7 +22,7 @@ class LogisticRegression(object):
     def fit(self, X, y):
         n_samples, n_features = X.shape
         self.weights = np.zeros(n_features)
-        self.bias = np.zeros(n_samples)
+        self.bias = 0
         
         for _ in range(self.n_iters):
             linear_pred: np.ndarray = np.dot(X, self.weights) + self.bias
@@ -37,6 +38,6 @@ class LogisticRegression(object):
         linear_pred: np.ndarray = np.dot(X, self.weights) + self.bias
         y_pred: np.ndarray = sigmoid(linear_pred)
         
-        class_predictions: List[float] = [0 if y <= 0.5 else 1 for y in y_pred]
+        class_predictions: List[float] = [0 if y < 0.5 else 1 for y in y_pred]
         
         return class_predictions

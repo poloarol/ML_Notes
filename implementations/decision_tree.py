@@ -1,6 +1,7 @@
 ### decision_tree.py
 
 import numpy as np
+from collections import Counter
 from scipy.stats import mode
 
 class Node(object):
@@ -24,8 +25,8 @@ class DecisionTree(object):
         self.root = None
     
     def fit(self, X: np.ndarray, y: np.ndarray):
-        self.n_features = X.shape[1] if not self.n_features else min(X.shape[1], self.n_features))
-        self.root = self.grow_tree(X, y)
+        self.n_features = X.shape[1] if not self.n_features else min(X.shape[1], self.n_features)
+        self.root = self._grow_tree(X, y)
     
     def _grow_tree(self, X: np.ndarray, y: np.ndarray, depth: int = 0) -> None:
         n_samples, n_features = X.shape
@@ -43,13 +44,15 @@ class DecisionTree(object):
         
         ### create child node
         left_idxs, right_idxs = self._split(X[:, best_features], best_threshold)
-        left = self._grow_tree(X[left_idxs, :], y[left_idxs, :], depth+1)
-        right = self._grow_tree(X[right_idxs, :], y[right_idxs, :], depth+1)
-        
+        left = self._grow_tree(X[left_idxs, :], y[left_idxs], depth+1)
+        right = self._grow_tree(X[right_idxs, :], y[right_idxs], depth+1)
         return Node(best_features, best_threshold, left, right)
+
         
     def _most_common_value_label(self, y) -> int:
-        return mode(y, axis=1)
+        counter = Counter(y)
+        value = counter.most_common(1)[0][0]
+        return value
     
     def _best_split(self, X: np.ndarray, y: np.ndarray, feature_indices: np.ndarray):
         best_gain = -1
@@ -61,7 +64,7 @@ class DecisionTree(object):
             
             for threshold in thresholds:
                 # calculate the information gain
-                gain = self._infromation_gain(y, X_column, threshold)
+                gain = self._information_gain(y, X_column, threshold)
                 
                 if gain > best_gain:
                     best_gain = gain
@@ -104,7 +107,7 @@ class DecisionTree(object):
         return -np.sum([p * np.log(p) for p in ps if p > 0])
             
     def predict(self, X: np.ndarray):
-        return [self._traverse_tree(x) for x in X]
+        return np.array([self._traverse_tree(x, self.root) for x in X])
     
     def _traverse_tree(self, x: np.ndarray, node: Node):
         if node.is_leaf_node():

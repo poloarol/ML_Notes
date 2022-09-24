@@ -19,7 +19,9 @@ def euclidean_distance(x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
         array of pairwise distances of dimensions (N, N')
     """
     
-    return np.linalg.norm(x1[: np.newaxis] - x2, axis=1)
+    # return np.linalg.norm(x1[: np.newaxis] - x2, axis=1)
+    distance = np.sqrt(np.sum((x1-x2)**2))
+    return distance
 
 
 class KNN(object):
@@ -33,9 +35,9 @@ class KNN(object):
         self.y = y
     
     def predict(self, X: np.ndarray) -> np.ndarray:
-        distances = euclidean_distance(X, self.X)
-        topk_idxs = np.argmax(distances, axis=1)[:, :self.k]
-        topk_labels = self.y[topk_idxs]
+        distances = [euclidean_distance(X, x_train) for x_train in self.X]
+        k_indices = np.argsort(distances)[:self.k]
+        k_nearest_labels = [self.y[i] for i in k_indices]
         
-        return mode(topk_labels, axis=1)
-        
+        most_common = Counter(k_nearest_labels).most_common()
+        return most_common[0][0]
