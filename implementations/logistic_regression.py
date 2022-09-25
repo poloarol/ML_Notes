@@ -38,6 +38,6 @@ class LogisticRegression(object):
         linear_pred: np.ndarray = np.dot(X, self.weights) + self.bias
         y_pred: np.ndarray = sigmoid(linear_pred)
         
-        class_predictions: List[float] = [0 if y < 0.5 else 1 for y in y_pred]
+        class_predictions: List[float] = [0 if y <= 0.5 else 1 for y in y_pred]
         
         return class_predictions

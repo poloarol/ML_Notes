@@ -19,13 +19,11 @@ class LinearRegression(object):
         
         # gradient descent
         for _ in range(self.n_iters):
-            y_predited = np.dot(X, self.weights)+ self.bias
-            
-            # compute gradient descent
-            dw = (1 / n_samples) * np.dot(X.T, (y_predited - y))
-            db = (1 / n_samples) * np.dot(y_predited - y)
-            
-            # update parameters
+            y_pred = np.dot(X, self.weights) + self.bias
+
+            dw = (1/n_samples) * np.dot(X.T, (y_pred-y))
+            db = (1/n_samples) * np.sum(y_pred-y)
+
             self.weights = self.weights - self.learning_rate * dw
             self.bias = self.bias - self.learning_rate * db
     
