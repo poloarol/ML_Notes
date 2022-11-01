@@ -1,0 +1,16 @@
+1. Discriminative models determine classes between observed data to aid in making predictions
+2. Generative models allow to learn a probabilty distribution to generate new data points
+    Unsupervised models
+    p(x) -> x`
+    probabilistic in nature
+    incorporate elements of randomness
+
+Applications of Generative models
+----------------------------------
+1. Upsampling datasets (Data Augmentation)
+    a. Avoid imbalanced datasets which are biased
+    b. new data belongs to the true distribution
+2. Imputation of missing values
+    a. Avoid dropping data, and creating skewed datasets
+    b. New data belongs to the true distribution
+3. Annonymizing sensitive datasets

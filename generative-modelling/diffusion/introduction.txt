@@ -1,0 +1,8 @@
+Denoising Diffussion Probabilistic Models
+
+Generative model for high-quality image synthesis
+
+Jonathan Ho, 2020
+
+1. Foward Diffussion: Incrementally adds noise to an image
+2. NN approximates the reverse diffusion process which removes noise to generate image

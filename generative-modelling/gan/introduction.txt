@@ -1,0 +1,48 @@
+Generative models
+
+Ian Goodfellow 2014
+
+1. Adversarial: Two neural networks compete with each other in a zero-sum game
+    Generator NN: Generates new images
+    Discriminator NN: Classifies new images
+2. Aversaries seek to become more accurate over time, hence cannot get better at the same time.
+
+
+Generator: Generates realistic samples
+1. Learns to genearte plausible data
+2. Data serves as negative samples to train the discriminator networks
+3. Implroves the quality of the samples durint the training process, till the 
+    discriminator finds it hard to tell generated data from real data
+
+Discriminator: Distinguishes between real and fake samples
+1. Learns to distinguish the generator's fake data from real data
+2. Penalized the genator for generating implausible data - forcing the generator to improve
+3. During training process, the discriminator's ability to tell apart real from fake steadily falls,
+    till the discriminator is unable to tell fake data from real data apart
+
+
+Architecture Overview of a GAN
+-------------------------------
+    1. Real images                          Real
+                            Discriminator   
+    2. Noise + Generator                    Fake
+
+
+Two Loss functions: Generator and Discriminator loss functions
+
+Common Problems
+----------------
+1. Vanishing Gradient
+    a. Discriminator works very well, causing the generator not to be able to update weights
+    b. Discriminator does not provide enough information to generator to improve
+    - wasserstein loss
+    - modified minimax loss
+2. Mode Collapse: Output does not represent the entire dataset
+    Ideally GANs should produce different outputs for each random input
+    a. Generator can learn one plausible input, and keep generating it to foul the discrminator
+    - wasserstein Loss
+    - Unrolled GANs
+3. Failure to Converge
+    Generator training on random feedback from Discriminator
+    - Add noise
+    - penalize discriminator for random feedback
