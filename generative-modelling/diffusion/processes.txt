@@ -1,0 +1,16 @@
+1. Forward Diffusion process
+
+a. Start with sample image
+b. Add noise till we have static. Incrementally, with small steps
+c. Noise follows a Normal distribution
+d. Foward Diffusion process is modelled as a Markoc chain
+
+2. Reverse Diffusion process
+
+a. Modelled as a Markoc chain
+b. Neural network learns the parameters of the Transition
+c. Neural network learns to remove noise at each step, because noise is added incrementally
+d. NN learns mean and variance to denoise images
+
+Training
+--------

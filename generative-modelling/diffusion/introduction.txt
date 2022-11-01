@@ -6,3 +6,32 @@ Jonathan Ho, 2020
 
 1. Foward Diffussion: Incrementally adds noise to an image
 2. NN approximates the reverse diffusion process which removes noise to generate image
+
+Generative Learning Trilemma
+-----------------------------
+1. Produce extremely high-quality samples
+2. Fast sampling (low- computational complexity)
+3. Diversity of solutions or Mode coverage
+    Generate data faithfully within the original, especially rare samples
+    Long tails of distribution often tend to be important
+
+    a. GANs satisfy both 1 and 2
+    b. Diffusion models satisfy both 1 and both 1 and 3
+
+Diffusion models are better at capturing the breadth of the training data's variance
+and also beat GANs in image generation tasks. 
+
+Metric to calculate diversity of solutions: Frechet Inception Distance (FID)
+    Measure the distance between a sample and two distribution
+
+
+Intuition behind Diffusion models
+---------------------------------
+1. Starts with an input sample and add noise randomly to the image, using small step sizes
+    Noise is from an independent Gaussian distribution
+    Add relatively small amplitude noise at each step
+    Add till we get noise similar to static
+
+    This proces is known as Forward Diffusion (Noising) process
+
+2. Use a Neural Network to reverse the noising process i.e. remove noise
