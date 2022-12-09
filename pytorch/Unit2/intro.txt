@@ -1,0 +1,18 @@
+PyTorch -> Based on Torch developed in Lua
+-------------------------------------------
+1. Tensor Library
+    Mathematics: Tensors are genralization of vectors and matrices
+    Computer Science: Data Structure for storing multidimensional arrays
+
+    The main difference between a tensor library and array library (NumPy) is:
+    They are very similar
+        - Support GPU computation
+        - Support Automatic Differentiation
+    Ideal for mathematic computation
+2. Automatic Differentiation Engine
+3. Deep Learning Library
+
+Improving code efficiciency using Linear Algebra
+------------------------------------------------
+1. For loop to dot products
+    z = x*w + b

@@ -1,0 +1,54 @@
+
+-- Lightning AI Fundamentals --
+
+1. What is Machine learning and application in the real world:
+- Face or Fingerprint recognition
+- Road side speed detection
+- Movie recommendation
+
+Computers learn from data:
+    - Label data to inform computers about the world, and make predictions
+
+2. How is machine learning related to deep learning?
+- deep learning is a subfield of machine learning
+- AI is a superset of both deep and machine learning, with them focussing on building
+    machines that learn from data
+- deep works best on unstructured data, while machine learning works best on structured data
+- deep learning is sometimes reffered to as representational learning
+
+3. Application of machine learning
+- Making predictions (DNNs, classical ML algos)
+    * spam classification
+    * object detection
+- Compressing data (Autoencoders, UMAP, PCA, t-SNE)
+    * exploring large datasets
+- Generating new data (VAEs, Diffusion Models, GANs)
+    * creating new art
+- Learning a series of actions (Reinforcement learning)
+    * games like chess, GO
+    * robotics
+
+4. Categories of Machine Learning
+- Supervised learning: Learn a function y = f(x) given a datasets containing observations and outcomes
+- Unsupervised learning: Describe datasets, by identifying patterns form the distinct observations
+- Reinforcement learning
+
+5. Supervised Machine Learning Workflow
+- Labelled examples -> Training, Test and Validation datasets
+- Classification (Distinct value as output)
+- Regression (Continuos value output)
+
+6. The Perceptron
+- Motivation: How does the human brain work. Analogous to the neurons.
+- Inputs -> BOX -> Class Labels (num of inputs are depend on number of variables)
+
+z = (x1 * w1) + (x2 * w2) + b -> allows to estimate the decision boundary
+
+Training
+--------
+1. Define the Training set
+2. Initialize model weights
+3. For every epoch
+    - Make a prediction
+    - Compute the error
+    - Update the weights, based on error (Using gradiet descent)

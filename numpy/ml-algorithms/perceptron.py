@@ -13,7 +13,7 @@ class Perceptron(object):
         self.bias: np.ndarray = None
         
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
-        n_samples, n_features = X.shape
+        _, n_features = X.shape
         
         # init parameters
         self.weights = np.zeros(n_features)
