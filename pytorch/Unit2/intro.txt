@@ -16,3 +16,11 @@ Improving code efficiciency using Linear Algebra
 ------------------------------------------------
 1. For loop to dot products
     z = x*w + b
+
+Debudding Code efficiently
+--------------------------
+1. pdb - Python Debugger
+
+Computation Graphs
+------------------
+1. Learn more about Computation Graphs
